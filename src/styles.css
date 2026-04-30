@@ -696,3 +696,23 @@ button {
     grid-template-columns: 1fr 1.2fr 1fr;
   }
 }
+/* Append this to the end of src/styles.css */
+
+.sync-banner {
+  border: 1px solid rgba(255, 70, 70, 0.35);
+  background: rgba(40, 0, 0, 0.55);
+  color: #ffb3b3;
+  padding: 12px;
+  border-radius: 12px;
+  margin-bottom: 14px;
+  font-size: 13px;
+  word-break: break-word;
+}
+
+.profile-wallet + .profile-wallet {
+  margin-top: 10px;
+}
+
+.reset-btn.compact {
+  margin: 0;
+}

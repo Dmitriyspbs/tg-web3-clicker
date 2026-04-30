@@ -5,14 +5,14 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@vitejs/plugin-react": "latest",
-    "vite": "latest",
-    "typescript": "latest",
-    "react": "latest",
-    "react-dom": "latest",
+    "@supabase/supabase-js": "^2.105.1",
+    "@tonconnect/ui-react": "latest",
     "@types/react": "latest",
     "@types/react-dom": "latest",
-    "@tonconnect/ui-react": "latest"
-  },
-  "devDependencies": {}
+    "@vitejs/plugin-react": "latest",
+    "react": "latest",
+    "react-dom": "latest",
+    "typescript": "latest",
+    "vite": "latest"
+  }
 }
