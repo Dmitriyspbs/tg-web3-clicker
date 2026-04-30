@@ -74,3 +74,4 @@ tonconnect-manifest.json
 
 на свой настоящий домен.
  
+ 
