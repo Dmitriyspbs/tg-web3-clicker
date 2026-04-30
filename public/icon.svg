@@ -1,0 +1,22 @@
+<svg width="256" height="256" viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="g" cx="50%" cy="45%" r="65%">
+      <stop offset="0%" stop-color="#36ff82"/>
+      <stop offset="45%" stop-color="#073d1d"/>
+      <stop offset="100%" stop-color="#020704"/>
+    </radialGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  <rect width="256" height="256" rx="58" fill="#020704"/>
+  <rect x="18" y="18" width="220" height="220" rx="48" fill="url(#g)" stroke="#33ff7a" stroke-width="3"/>
+  <path d="M62 88 L34 128 L62 168" fill="none" stroke="#d7ffe7" stroke-width="16" stroke-linecap="round" stroke-linejoin="round" filter="url(#glow)"/>
+  <path d="M194 88 L222 128 L194 168" fill="none" stroke="#d7ffe7" stroke-width="16" stroke-linecap="round" stroke-linejoin="round" filter="url(#glow)"/>
+  <path d="M150 70 L106 186" stroke="#3dff7e" stroke-width="18" stroke-linecap="round" filter="url(#glow)"/>
+  <text x="128" y="224" text-anchor="middle" font-family="Courier New, monospace" font-weight="900" font-size="28" fill="#8fffbe">CX</text>
+</svg>
