@@ -2,8 +2,6 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { TonConnectButton, useTonAddress } from "@tonconnect/ui-react";
 
 const MAX_ENERGY = 100;
-const [isGenesisOperator, setIsGenesisOperator] = useState(false);
-const [genesisNumber, setGenesisNumber] = useState<number | null>(null);
 
 type Screen = "dashboard" | "profile";
 
@@ -31,10 +29,6 @@ type Player = {
   referralBonusRemainder: number;
   lastEnergyAt: string;
   updatedAt: string;
-  isGenesisOperator: boolean;
-  genesisNumber: number | null;
-  genesisAssignedAt: string | null;
-  genesisBonusClaimed: boolean;
 };
 
 type PublicConfig = {
@@ -165,8 +159,6 @@ export default function App() {
   const telegramId = useMemo(() => getTelegramId(), []);
 
   function applyPlayer(player: Player) {
-    setIsGenesisOperator(player.isGenesisOperator || false);
-    setGenesisNumber(player.genesisNumber || null);
     setCoins(player.coins);
     setEnergy(player.energy);
     setLevel(player.level);
@@ -513,13 +505,7 @@ export default function App() {
             <div className="profile-avatar">CX</div>
             <p className="section-label">OPERATOR PROFILE</p>
             <h2>{userName}</h2>
-            <p className="profile-rank">{rank}
-            {isGenesisOperator && (
-              <div className="genesis-badge">
-              GENESIS OPERATOR #{genesisNumber}
-              </div>
-            )}</p>
-            
+            <p className="profile-rank">{rank}</p>
 
             <div className="profile-grid">
               <div>
