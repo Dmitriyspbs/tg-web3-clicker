@@ -23,6 +23,12 @@ type Player = {
   level: number;
   xp: number;
   tasks: Record<string, boolean>;
+
+  isGenesisOperator: boolean;
+  genesisNumber: number | null;
+  genesisAssignedAt: string | null;
+  genesisBonusClaimed: boolean;
+
   referredByTelegramId: string | null;
   invitedCount: number;
   referralBonusTotal: number;
@@ -135,6 +141,9 @@ export default function App() {
   const [xp, setXp] = useState(0);
   const maxXp = 1500;
 
+  const [isGenesisOperator, setIsGenesisOperator] = useState(false);
+  const [genesisNumber, setGenesisNumber] = useState<number | null>(null);
+
   const [tasks, setTasks] = useState<Task[]>(DEFAULT_TASKS);
   const [config, setConfig] = useState<PublicConfig>({
     botUsername: "",
@@ -163,6 +172,8 @@ export default function App() {
     setEnergy(player.energy);
     setLevel(player.level);
     setXp(player.xp);
+    setIsGenesisOperator(Boolean(player.isGenesisOperator));
+    setGenesisNumber(player.genesisNumber || null);
     setTasks(applyPlayerToTasks(player));
     setInvitedCount(player.invitedCount || 0);
     setReferralBonusTotal(player.referralBonusTotal || 0);
@@ -188,6 +199,10 @@ export default function App() {
       applyConfig(data.config);
       setSyncStatus("DATABASE ONLINE");
       addTerminal("> Supabase sync complete");
+
+      if (data.player.isGenesisOperator) {
+        addTerminal(`> genesis operator #${data.player.genesisNumber} verified`);
+      }
     } catch (error) {
       const message = error instanceof Error ? error.message : "Unknown API error";
       setApiError(message);
@@ -301,7 +316,13 @@ export default function App() {
   const completedTasks = tasks.filter((task) => task.done).length;
   const xpPercent = Math.min(100, Math.round((xp / maxXp) * 100));
   const energyPercent = Math.min(100, Math.round((energy / MAX_ENERGY) * 100));
-  const rank = coins >= 10000 ? "ROOT OPERATOR" : coins >= 3000 ? "GHOST NODE" : "JUNIOR OPERATOR";
+  const rank = isGenesisOperator
+    ? "GENESIS OPERATOR"
+    : coins >= 10000
+      ? "ROOT OPERATOR"
+      : coins >= 3000
+        ? "GHOST NODE"
+        : "JUNIOR OPERATOR";
 
   if (isLoading) {
     return (
@@ -316,7 +337,7 @@ export default function App() {
           <div className="loading-bar">
             <div />
           </div>
-          <code>{">"} referral bridge initializing...</code>
+          <code>{">"} genesis bridge initializing...</code>
         </div>
       </main>
     );
@@ -328,7 +349,7 @@ export default function App() {
         <div className="mini-panel">
           <div className="mini-title">{">"} {syncStatus}</div>
           <div className="mini-text">NODE 07 • SUPABASE</div>
-          <div className="mini-text">// CXR REF PROTOCOL V3.0</div>
+          <div className="mini-text">// CXR GENESIS PROTOCOL V4.0</div>
         </div>
 
         <div className="logo-wrap">
@@ -353,6 +374,12 @@ export default function App() {
         </div>
       )}
 
+      {isGenesisOperator && (
+        <div className="genesis-badge genesis-badge-top">
+          GENESIS OPERATOR #{genesisNumber}
+        </div>
+      )}
+
       {screen === "dashboard" ? (
         <>
           <section className="hero-grid">
@@ -366,7 +393,7 @@ export default function App() {
                 <h2>{userName}</h2>
 
                 <div className="xp-row">
-                  <span>OPERATOR LV. {level}</span>
+                  <span>{rank} • LV. {level}</span>
                   <span>
                     {xp} / {maxXp} XP
                   </span>
@@ -507,6 +534,12 @@ export default function App() {
             <h2>{userName}</h2>
             <p className="profile-rank">{rank}</p>
 
+            {isGenesisOperator && (
+              <div className="genesis-badge">
+                GENESIS OPERATOR #{genesisNumber}
+              </div>
+            )}
+
             <div className="profile-grid">
               <div>
                 <span>Telegram ID</span>
@@ -556,6 +589,7 @@ export default function App() {
             <div className="terminal-output">
               <div>{">"} operator profile loaded</div>
               <div>{">"} rank calculated: {rank}</div>
+              <div>{">"} genesis status: {isGenesisOperator ? `#${genesisNumber}` : "not assigned"}</div>
               <div>{">"} referral nodes: {invitedCount}</div>
               <div>{">"} passive bonus: {referralBonusTotal} CXR</div>
             </div>
