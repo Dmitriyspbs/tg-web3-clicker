@@ -149,6 +149,12 @@ function normalizePlayer(row, extra = {}) {
     level: regenerated.level,
     xp: regenerated.xp,
     tasks: regenerated.tasks || {},
+ 
+    isGenesisOperator: Boolean(regenerated.is_genesis_operator),
+    genesisNumber: regenerated.genesis_number || null,
+    genesisAssignedAt: regenerated.genesis_assigned_at || null,
+    genesisBonusClaimed: Boolean(regenerated.genesis_bonus_claimed),
+    
     referredByTelegramId: regenerated.referred_by_telegram_id ? String(regenerated.referred_by_telegram_id) : null,
     invitedCount: extra.invitedCount || 0,
     referralBonusTotal: regenerated.referral_bonus_total || 0,
