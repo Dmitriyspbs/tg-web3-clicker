@@ -716,3 +716,55 @@ button {
 .reset-btn.compact {
   margin: 0;
 }
+/* CoderX referral + channel verification additions */
+
+.task-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: stretch;
+  min-width: 96px;
+}
+
+.secondary-btn {
+  min-width: 96px;
+  height: 38px;
+  border: 1px solid rgba(0, 255, 120, 0.25);
+  border-radius: 10px;
+  background: rgba(0, 255, 120, 0.08);
+  color: #80ffaf;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.secondary-btn:active,
+.claim-btn:active {
+  transform: scale(0.98);
+}
+
+.task-meta {
+  margin-top: 6px;
+  color: rgba(128, 255, 175, 0.72);
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+.claim-btn.wide {
+  width: 100%;
+}
+
+@media (max-width: 420px) {
+  .task-row {
+    align-items: stretch;
+  }
+
+  .task-actions {
+    min-width: 82px;
+  }
+
+  .secondary-btn,
+  .claim-btn {
+    min-width: 82px;
+    font-size: 12px;
+  }
+}
